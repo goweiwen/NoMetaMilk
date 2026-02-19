@@ -25,6 +25,11 @@ object ChatManager : Listener {
     fun onChat(event: AsyncChatEvent) {
         val message = plainTextComponentSerializer.serialize(event.originalMessage())
         if (plugin.config.blacklist.any { it.containsMatchIn(message) }) {
+            if (plugin.config.messages.messageBlocked.isNotEmpty()) {
+                val errorMessage = plugin.miniMessage.deserialize(plugin.config.messages.messageBlocked)
+                event.player.sendMessage(errorMessage)
+            }
+
             event.isCancelled = true
             return
         }

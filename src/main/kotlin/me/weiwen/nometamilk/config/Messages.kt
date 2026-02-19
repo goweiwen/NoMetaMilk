@@ -7,4 +7,6 @@ import kotlinx.serialization.Serializable
 data class Messages(
     @SerialName("config-reloaded")
     val configReloaded: String = "<gold>Configuration reloaded.</gold>",
+    @SerialName("message-blocked")
+    val messageBlocked: String = "<red>Your message can only contain Banner Font.</red>",
 )
