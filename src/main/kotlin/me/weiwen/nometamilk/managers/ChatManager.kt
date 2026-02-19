@@ -28,5 +28,11 @@ object ChatManager : Listener {
             event.isCancelled = true
             return
         }
+
+        if (plugin.config.prependBlankLine) {
+            event.viewers()
+                .filterIsInstance<Player>()
+                .forEach { it.sendMessage(Component.empty()) }
+        }
     }
 }

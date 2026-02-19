@@ -21,6 +21,10 @@ data class Config(
         NON_BANNER_FONT_PUA
     ),
 
+    /// Whether a blank line should be prepended to each message
+    @SerialName("prepend-blank-line")
+    var prependBlankLine: Boolean = true,
+
     var messages: Messages = Messages(),
 )
 
