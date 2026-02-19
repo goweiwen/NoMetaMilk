@@ -5,6 +5,7 @@ package me.weiwen.nometamilk.config
 import com.charleskorn.kaml.Yaml
 import kotlinx.serialization.*
 import me.weiwen.nometamilk.NoMetaMilk
+import me.weiwen.nometamilk.filters.BANNER_FONT_PUA
 import me.weiwen.nometamilk.filters.NON_BANNER_FONT_PUA
 import me.weiwen.nometamilk.serializers.RegexSerializer
 import java.io.File
@@ -17,13 +18,17 @@ data class Config(
     @SerialName("config-version")
     var configVersion: String = CONFIG_VERSION,
 
+    /// If any regex match, the message is blocked
     var blacklist: List<Regex> = listOf(
         NON_BANNER_FONT_PUA
     ),
 
-    /// Whether a blank line should be prepended to each message
-    @SerialName("prepend-blank-line")
-    var prependBlankLine: Boolean = true,
+    /// If any regex match, a blank line is added above the message
+    /// This prevents banner font messages from overlapping.
+    @SerialName("prepend-blank-line-whitelist")
+    var prependBlankLineWhitelist: List<Regex> = listOf(
+        BANNER_FONT_PUA
+    ),
 
     var messages: Messages = Messages(),
 )

@@ -29,7 +29,7 @@ object ChatManager : Listener {
             return
         }
 
-        if (plugin.config.prependBlankLine) {
+        if (plugin.config.prependBlankLineWhitelist.any { it.containsMatchIn(message) }) {
             event.viewers()
                 .filterIsInstance<Player>()
                 .forEach { it.sendMessage(Component.empty()) }
